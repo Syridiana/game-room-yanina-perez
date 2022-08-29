@@ -1,0 +1,11 @@
+<label for="">Edad Uno</label>&nbsp;
+<input type="number" [(ngModel)]="edadUno">
+<br/><br/>
+<label for="">Edad Dos</label>&nbsp;
+<input type="number" [(ngModel)]="edadDos" >
+<br/><br/>
+<label for="">Promedio</label>&nbsp;
+<input type="number" [(ngModel)]="promedio" disabled>
+<br/><br/>
+<input type="button" (click)="calcular()" value="Calcular"> &nbsp;
+<input type="button" (click)="limpiar()" value="Limpiar"> 
