@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap');
+
+.carta{
+    width: 120px;
+    height: auto;
+    position: absolute;
+}
+
+#cartaWrapper{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+}
+
+#number{
+    z-index: 1;
+    color: #e2e0e5;
+    font-family: 'Merriweather', serif;
+    font-size: 22px;
+    top: 5px;
+    left: 2px;
+    text-align: center;
+    position: relative;
+}
+
+
+#cartaAnteriorWrapper{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+}
+
+#numberAnterior{
+    z-index: 1;
+    color: #e2e0e5;
+    font-family: 'Merriweather', serif;
+    font-size: 12x;
+    top: 5px;
+    left: 2px;
+    text-align: center;
+    position: relative;
+}
+
+.cartaAnterior{
+    width: 80px;
+    height: auto;
+    position: absolute;
+}
+
+h3{
+    text-align: center;
+}
+
+.btn{
+    margin: 0 5px;
+}
+#wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

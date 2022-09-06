@@ -1,0 +1,47 @@
+<div class="col-40">
+    
+    <div id="titulo">
+      <h2>Puzzle</h2>
+    </div>
+    <div id="instrucciones">
+      <h2>Instrucciones:</h2>
+      <ul id="lista-instrucciones">
+        <li>Ordená la imagen</li>
+        <li>Usá los botones con flechas</li>
+        <li>Utilizá la imagen de abajo como referencia</li>
+        <li>¿En cuántos movimientos podés hacerlo?</li>
+      </ul>
+    </div>
+    <div id="objetivo">
+      <div class="texto-centrado">
+        <img src="../../../../assets/img/games/final.png">
+      </div>
+    </div>
+    <div id="ultimo-mov">
+      <div id="flecha" class="texto-centrado">
+      
+      </div>
+    </div>
+    <input class="boton" type="button" value="Reiniciar" (click)="reiniciar()"/>
+    <br><br>
+    <button class="btn btn-info botones" (click)="actualizarUltimoMovimiento('↑')">↑</button>
+    <button class="btn btn-info botones" (click)="actualizarUltimoMovimiento('↓')">↓</button>
+    <button class="btn btn-info botones" (click)="actualizarUltimoMovimiento('→')">→</button>
+    <button class="btn btn-info botones" (click)="actualizarUltimoMovimiento('←')">←</button>
+  </div>
+  <div class="col-60">
+    <div id="juego">
+      <div class="piezas-del-juego" id="pieza1"><img src="../../../../assets/img/games/10.jpg"></div>
+      <div class="piezas-del-juego" id="pieza2"><img src="../../../../assets/img/games/20.jpg"></div>
+      <div class="piezas-del-juego" id="pieza3"><img src="../../../../assets/img/games/30.jpg"></div>
+      <div class="piezas-del-juego" id="pieza4"><img src="../../../../assets/img/games/40.jpg"></div>
+      <div class="piezas-del-juego" id="pieza5"><img src="../../../../assets/img/games/50.jpg"></div>
+      <div class="piezas-del-juego" id="pieza6"><img src="../../../../assets/img/games/60.jpg"></div>
+      <div class="piezas-del-juego" id="pieza7"><img src="../../../../assets/img/games/70.jpg"></div>
+      <div class="piezas-del-juego" id="pieza8"><img src="../../../../assets/img/games/80.jpg"></div>
+      <div class="piezas-del-juego" id="pieza9"></div> 
+    </div>
+  </div>
+  <div id="footer">
+    
+  </div>

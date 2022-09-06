@@ -1,0 +1,4 @@
+<p>¿A que pelicula pertenece esta imagen?</p>
+<img src={{imageUrl}} alt="">
+<br><br>
+<button class="btn btn-info botones" *ngFor="let movie of movieListId" (click)="chequearPelicula(movie.id)">{{movie.name}}</button>

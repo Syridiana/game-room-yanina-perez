@@ -53,3 +53,8 @@ h2, p{
 }
 
 
+.wrapper{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
