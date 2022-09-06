@@ -18,11 +18,14 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.usuario.nombre = "Kiki";
+    this.usuario.apellido = "El demonio";
+    localStorage.setItem("user", JSON.stringify(this.usuario));
 
   }
 
   calcular():void{
-    if(this.edadUno != undefined && this.edadDos != undefined ){
+    if(this.edadUno && this.edadDos ){
       this.promedio = (this.edadDos + this.edadUno) / 2;
     }
 

@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --blue: #385FFC;
+    --white: #FDFDFD;
+    --black: #0D1311;
+    --orange: #FB992A;
+    --pink: #FCA2D6;
+    --peach: #FFC09F;
+}
+
+
+body {
+    padding-top: 5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: var(--white);
+}
+
+/* Blue: #385FFC
+Pink: #FCA2D6
+Orange: #FB992A
+Light Pink: #FFC09F
+Black: #0D1311
+White: #FDFDFD */

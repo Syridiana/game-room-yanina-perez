@@ -8,6 +8,9 @@ import { GameComponent } from './Views/game/game.component';
 import { HomeComponent } from './Views/home/home.component';
 import { LoginComponent } from './Components/login/login.component';
 import { ErrorComponent } from './Components/error/error.component';
+import { NotFoundComponent } from './Vistas/not-found/not-found.component';
+import { NavComponent } from './Components/nav/nav.component';
+import { AboutComponent } from './Views/about/about.component';
 
 
 
@@ -17,7 +20,10 @@ import { ErrorComponent } from './Components/error/error.component';
     GameComponent,
     HomeComponent,
     LoginComponent,
-    ErrorComponent
+    ErrorComponent,
+    NotFoundComponent,
+    NavComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

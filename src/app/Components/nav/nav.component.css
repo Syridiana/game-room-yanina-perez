@@ -1,0 +1,30 @@
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+
+  .nav-link{
+    padding: 0.5rem 1rem!important;
+  }
+
+  .navbar{
+    padding: 0.5rem 0.5rem!important;
+  }
+
+/*   .navbar-dark{
+    background-color: var(--pink)!important;
+  }
+
+  .nav-link, .navbar-brand {
+    color: var(--black)!important;
+  } */
