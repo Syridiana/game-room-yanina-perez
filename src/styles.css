@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-:root {
+/* :root {
     --blue: #385FFC;
     --white: #FDFDFD;
     --black: #0D1311;
@@ -8,6 +8,21 @@
     --peach: #FFC09F;
     --grey: #e8ecff;
     --magenta: #ff0077;
+} */
+
+
+:root {
+    --accent: #f76ac8;
+    --white: #FDFDFD;
+    --primary-dark: #092e6d;
+    --dark: #092e6d;
+    --orange: #e99f4c;
+    --peach: #FFC09F;
+    --light: #eddcd9;
+    --grey: #f2ebe9;
+    --dark-grey: #1c1c1c;
+    --sky: #00C2FF;
+    --black: #000032;
 }
 
 

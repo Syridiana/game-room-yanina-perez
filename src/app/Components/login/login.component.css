@@ -1,57 +1,3 @@
-/* .form-signin {
-  width: 100%;
-  max-width: 530px;
-  padding: 15px;
-  margin: auto;
-}
-
-.bd-placeholder-img {
-  font-size: 1.125rem;
-  text-anchor: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-}
-
-@media (min-width: 768px) {
-  .bd-placeholder-img-lg {
-    font-size: 3.5rem;
-  }
-}
-
-
-.form-signin .checkbox {
-  font-weight: 400;
-}
-
-.form-signin .form-floating:focus-within {
-  z-index: 2;
-}
-
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-.buttonWrapper {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.loginImg{
-  width: 100%;
-}
- */
-
-
  *,
 *::before,
 *::after {
@@ -104,6 +50,24 @@
 	}
 }
 
+@keyframes invisible {
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes showing {
+	0% {
+		opacity: 0;
+	}
+	49.999% {
+		opacity: 1;
+	}
+}
+
 .switcher {
 	position: relative;
 	cursor: pointer;
@@ -115,22 +79,23 @@
 	font-family: inherit;
 	font-size: 16px;
 	letter-spacing: .5px;
-	color: var(--black);
+	color: var(--primary-dark);
 	background-color: transparent;
 	border: none;
 	outline: none;
 	transform: translateX(0);
 	transition: all .3s ease-out;
+  font-weight: 600;
 }
 
 .form-wrapper.is-active .switcher-login {
 	color: var(--white);
-	transform: translateX(90px);
+	transform: translateX(132px);
 }
 
 .form-wrapper.is-active .switcher-signup {
 	color: var(--white);
-	transform: translateX(-90px);
+	transform: translateX(-132px);
 }
 
 .underline {
@@ -172,8 +137,9 @@
 	min-width: 260px;
 	margin-top: 50px;
 	padding: 30px 25px;
-/*   border-radius: 5px; */
+  max-width: 263px; 
 	transform-origin: top;
+  border-radius: 30px;
 }
 
 .form-login {
@@ -184,9 +150,17 @@
 	animation: showLogin .3s ease-in forwards;
 }
 
+.form-wrapper.is-active .form-login .header-form, .form-wrapper.is-active .form-signup .header-form{
+	animation: showing .3s ease-in forwards;
+}
+
+.form-wrapper .form-login .header-form, .form-wrapper .form-signup .header-form {
+	animation: invisible .3s ease-in forwards;
+}
+
 @keyframes showLogin {
 	0% {
-		background: var(--blue);
+		background: var(--primary-dark);
 		transform: translate(40%, 10px);
 	}
 	50% {
@@ -194,7 +168,7 @@
 	}
 	100% {
 		background-color: var(--white);
-		transform: translate(35%, -20px);
+		transform: translate(50%, -20px);
 	}
 }
 
@@ -207,8 +181,8 @@
 		transform: translate(0, 0);
 	}
 	100% {
-		background: var(--blue);
-		transform: translate(40%, 10px);
+		background: var(--primary-dark);
+		transform: translate(45%, -5px) scaleY(1.22);
 	}
 }
 
@@ -222,7 +196,7 @@
 
 @keyframes showSignup {
 	0% {
-		background: var(--blue);
+		background: var(--primary-dark);
 		transform: translate(-40%, 10px) scaleY(.8);
 	}
 	50% {
@@ -230,7 +204,7 @@
 	}
 	100% {
 		background-color: var(--white);
-		transform: translate(-35%, -20px) scaleY(1);
+		transform: translate(-50%, -20px) scaleY(1);
 	}
 }
 
@@ -243,8 +217,8 @@
 		transform: translate(0, 0) scaleY(.8);
 	}
 	100% {
-		background: var(--blue);
-		transform: translate(-40%, 10px) scaleY(.8);
+		background: var(--primary-dark);
+		transform: translate(-45%, 0px) scaleY(.81);
 	}
 }
 
@@ -322,28 +296,28 @@
 
 .btn-login {
   color: var(--white);
-	background: var(--blue);
+	background: var(--primary-dark);
 	transform: translateX(-30%);
 }
 
 .btn-signup {
 	color: var(--white);
-	background: var(--blue);
+	background: var(--primary-dark);
 	transform: translateX(30%);
 }
 
 
 .btn-login:hover {
-  color: var(--blue);
-	box-shadow: inset 0 0 0 1px var(--blue);
+  color: var(--primary-dark);
+	box-shadow: inset 0 0 0 1px var(--primary-dark);
 	background: var(--white);
 	transform: translateX(-30%);
   transition: .5s ease;
 }
 
 .btn-signup:hover {
-	color: var(--blue);
-	box-shadow: inset 0 0 0 1px var(--blue);
+	color: var(--primary-dark);
+	box-shadow: inset 0 0 0 1px var(--primary-dark);
 	background: var(--white);
 	transform: translateX(30%);
 }
@@ -355,5 +329,13 @@
   left:0;
   width: 100%;
   height: 100%;
-  background-color: var(--pink);
+  background-color: var(--accent);
+}
+
+.header-form{
+  width: calc(50px + 100%);
+  height: auto;
+  margin-left: -25px;
+  margin-top: -30px;
+  margin-bottom: 20px;
 }
