@@ -1,0 +1,31 @@
+{
+    "game-list":
+        [
+            {
+                "title": "Ahorcado",
+                "description": "Adiviná la palabra",
+                "image": "../../assets/img/games/hangman-thumbnail.jpg",
+                "path": "games/hangman"
+            },
+            {
+                "title": "Preguntados",
+                "description": "Reconocé a que película pertenece la imagen.",
+                "image": "../../assets/img/games/trivia-thumbnail.jpg",
+                "path": "games/trivia"
+            },
+            {
+                "title": "Mayor o Menor",
+                "description": "Adiviná el valor de la próxima carta",
+                "image": "../../assets/img/games/gol-thumbnail.jpg",
+                "path": "games/greater-or-less"
+            },
+            {
+                "title": "Puzzle",
+                "description": "Armá la imagen",
+                "image": "../../assets/img/games/my-game-thumbnail.jpg",
+                "path": "games/my-game"
+            }
+        ]
+        
+    
+}

@@ -27,11 +27,20 @@
 
 
 body {
-    padding-top: 5rem;
+    padding-top: 3rem;
     padding-left: 2rem;
     padding-right: 2rem;
     background-color: var(--white);
 }
+
+
+@media (min-width: 768px) {
+    body {
+        padding-top: 5rem;
+    }
+    
+  }
+
 
 /* Blue: #385FFC
 Pink: #FCA2D6
