@@ -15,6 +15,7 @@
     --accent: #f76ac8;
     --white: #FDFDFD;
     --primary-dark: #092e6d;
+    --primary-dark-disabled: #98a0ad;
     --dark: #092e6d;
     --orange: #e99f4c;
     --peach: #FFC09F;
@@ -26,10 +27,12 @@
 }
 
 
+
+
 body {
     padding-top: 3rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+/*     padding-left: 2rem;
+    padding-right: 2rem; */
     background-color: var(--white);
 }
 

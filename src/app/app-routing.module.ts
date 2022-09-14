@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ErrorComponent } from './Components/error/error.component';
 import { LoginComponent } from './Components/login/login.component';
+import { ErrorComponent } from './Components/shared/error/error.component';
 import { AboutComponent } from './Views/about/about.component';
 import { GameComponent } from './Views/games/game.component';
 import { GreaterOrLessComponent } from './Views/games/greater-or-less/greater-or-less.component';

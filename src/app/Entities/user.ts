@@ -1,7 +1,9 @@
 export class User {
-    nombre:string|undefined;
-    apellido:string|undefined;
-    clave:string|undefined;
+    userName:string|undefined;
+    pass:string|undefined;
+    registerDate:string|undefined;
+    points:number|undefined;
+    email:string|undefined;
 
     mostrar() {
         console.log(this);

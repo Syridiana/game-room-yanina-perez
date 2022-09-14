@@ -6,20 +6,32 @@
         Login
         <span class="underline"></span>
       </button>
-      <form class="form form-login">
+      <form class="form form-login" (ngSubmit)="login()" [formGroup]="userLogin">
         <img src="../../../assets/img/loginImg.jpg" alt="" class="header-form">
         <fieldset>
           <legend>Please, enter your email and password for login.</legend>
           <div class="input-block">
-            <label for="login-email">E-mail</label>
-            <input id="login-email" type="email" required>
+            <label for="login-email">E-mail</label>             
+            <span class="text-danger form-small-text" *ngIf="userLogin.get('email')?.hasError('required') && userLogin.get('email')?.touched">
+              | El correo es requerido.
+            </span>
+            <span class="text-danger form-small-text" *ngIf="userLogin.get('email')?.hasError('email') && userLogin.get('email')?.touched">
+              | Formato invalido.
+            </span>
+            <input id="login-email" type="email" formControlName="email">
           </div>
           <div class="input-block">
-            <label for="login-password">Password</label>
-            <input id="login-password" type="password" required>
+            <label for="login-password">Password</label> 
+            <span class="text-danger form-small-text" *ngIf="userLogin.get('password')?.hasError('required') && userLogin.get('password')?.touched">
+              | Se requiere una contraseña.
+            </span>
+            <input id="login-password" type="password" formControlName="password">
           </div>
         </fieldset>
-        <button type="submit" class="btn-login">Login</button>
+        <div class="button-wrapper">
+          <button type="submit" class="btn-login">Login</button> <button type="button" class="btn-auto"
+            (click)="autoComplete()">Autcompletar</button>
+        </div>
       </form>
     </div>
     <div class="form-wrapper">
@@ -27,25 +39,52 @@
         Sign Up
         <span class="underline"></span>
       </button>
-      <form class="form form-signup">
+      <form (ngSubmit)="register()" [formGroup]="userRegister" class="form form-signup">
         <img src="../../../assets/img/signupImg.jpg" alt="" class="header-form">
         <fieldset>
-          <legend>Please, enter your email, password and password confirmation for sign up.</legend>
-          <div class="input-block">
-            <label for="signup-username">Username</label>
-            <input id="signup-email" type="text" required>
+          <div class="wrapper">
+            <legend>Please, enter your email, password and password confirmation for sign up.</legend>
+            <div class="input-block">
+              <label for="signup-username">Username</label>             
+              <span class="text-danger form-small-text" *ngIf="userRegister.get('name')?.hasError('required') && userRegister.get('name')?.touched">
+                | Campo requerido.
+              </span>
+              <input id="signup-username" type="text" formControlName="name">
+            </div>
+            <div class="input-block">
+              <label for="signup-email">E-mail</label>
+              <span class="text-danger form-small-text" *ngIf="userRegister.get('email')?.hasError('required') && userRegister.get('email')?.touched">
+                | Campo requerido.
+              </span>
+              <span class="text-danger form-small-text" *ngIf="userRegister.get('email')?.hasError('email') && userRegister.get('email')?.touched">
+                | Formato invalido.
+              </span>
+              <input id="signup-email" type="email" formControlName="email">
+            </div>
           </div>
-          <div class="input-block">
-            <label for="signup-email">E-mail</label>
-            <input id="signup-email" type="email" required>
-          </div>
-          <div class="input-block">
-            <label for="signup-password">Password</label>
-            <input id="signup-password" type="password" required>
+          <div class="wrapper">
+            <div class="input-block">
+              <label for="signup-password">Password</label>
+              <span class="text-danger form-small-text" *ngIf="userRegister.get('password')?.hasError('required') && userRegister.get('password')?.touched">
+                | Campo requerido.
+              </span>
+              <span class="text-danger form-small-text" *ngIf="userRegister.get('password')?.hasError('minlength') && userRegister.get('password')?.touched">
+                | Al menos 6 caracteres.
+              </span>
+              <input id="signup-password" type="password" formControlName="password">
+            </div>
+            <div class="input-block">
+              <label for="signup-password-repeat">Repeat password</label>
+              <span class="text-danger form-small-text" *ngIf="userRegister.get('passwordRepeat')?.hasError('required') && userRegister.get('passwordRepeat')?.touched">
+                | Campo requerido.
+              </span>
+              <input id="signup-password-repeat" type="password" formControlName="passwordRepeat">
+            </div>
           </div>
         </fieldset>
-        <button type="submit" class="btn-signup">Sign Up</button>
+        <button type="submit" class="btn-signup" [disabled]="userRegister.invalid">Sign Up</button>
       </form>
     </div>
   </div>
 </section>
+<!-- <app-spinner></app-spinner> -->

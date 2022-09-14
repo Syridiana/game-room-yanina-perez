@@ -14,12 +14,12 @@ export class GameComponent implements OnInit {
   promedio:number|undefined;
 
   constructor() { 
-    this.usuario.nombre = '';
+/*     this.usuario.nombre = ''; */
   }
 
   ngOnInit(): void {
-    this.usuario.nombre = "Kiki";
-    this.usuario.apellido = "El demonio";
+/*     this.usuario.nombre = "Kiki";
+    this.usuario.apellido = "El demonio"; */
     localStorage.setItem("user", JSON.stringify(this.usuario));
 
   }
