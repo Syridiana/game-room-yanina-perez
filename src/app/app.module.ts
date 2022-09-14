@@ -19,6 +19,10 @@ import { environment } from 'src/environments/environment';
 import { SpinnerComponent } from './Components/shared/spinner/spinner.component';
 import { NavComponent } from './Components/shared/nav/nav.component';
 import { ErrorComponent } from './Components/shared/error/error.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { FirestoreModule } from '@angular/fire/firestore';
 
 
 
@@ -43,7 +47,10 @@ import { ErrorComponent } from './Components/shared/error/error.component';
     AppRoutingModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FirestoreModule,
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideFirestore(() => getFirestore())
   ],
   providers: [],
   bootstrap: [AppComponent]

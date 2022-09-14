@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { initializeApp } from "firebase/app";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/compat/auth'
 import { defaultUrlMatcher, DefaultUrlSerializer, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { FirebaseCodeErrorService } from 'src/app/Services/firebase-code-error.service';
+import UserInterface from 'src/app/Entities/user-interface';
+import { formatDate } from '@angular/common';
+import { UserFirestoreService } from 'src/app/Services/user-firestore-service.service';
 
 
 @Component({
@@ -21,7 +23,8 @@ export class LoginComponent implements OnInit {
   passwordRepeat: string | undefined;
   name: string | undefined;
 
-  constructor(private fb: FormBuilder, private afAuth: AngularFireAuth, private router: Router, private FirebaseCodeError: FirebaseCodeErrorService) {
+  constructor(private fb: FormBuilder, private afAuth: AngularFireAuth, private router: Router, private FirebaseCodeError: FirebaseCodeErrorService,
+    private userFirestoreService: UserFirestoreService) {
 
     this.userRegister = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -49,6 +52,7 @@ export class LoginComponent implements OnInit {
       })
     })
 
+
   }
 
   autoComplete(): void {
@@ -57,7 +61,7 @@ export class LoginComponent implements OnInit {
   }
 
 
-  register(): void {
+  async register() {
     this.email = this.userRegister.value.email;
     this.password = this.userRegister.value.password;
     this.passwordRepeat = this.userRegister.value.passwordRepeat;
@@ -97,8 +101,24 @@ export class LoginComponent implements OnInit {
 
         this.router.navigate(['/']);
 
+        const currentDate = new Date();
+
+        const cValue = formatDate(currentDate, 'yyyy-MM-dd', 'en-US');
+
+
+
+
+        this.userFirestoreService.addUser({
+          'email': this.email,
+          'userName': this.name,
+          'points': 0,
+          'registerDate': cValue
+        });
+
+
 
       }).catch((error) => {
+        console.log(error)
 
         Swal.fire({
           title: 'Error!',
@@ -169,7 +189,13 @@ export class LoginComponent implements OnInit {
   }
 
 
+setUser(user: any){
+  localStorage.setItem('testObject', JSON.stringify(user));
+}
 
+deleteUser(user: any){
+
+}
 
 
 

@@ -95,6 +95,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "sala-juegos:build:production",
+            "firebaseProject": "yanina-perez-laboiv2022",
+            "firebaseHostingSite": "yanina-perez-laboiv2022"
+          }
         }
       }
     }

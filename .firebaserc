@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "yanina-perez-laboiv2022"
+  },
+  "targets": {
+    "yanina-perez-laboiv2022": {
+      "hosting": {
+        "sala-juegos": [
+          "yanina-perez-laboiv2022"
+        ]
+      }
+    }
   }
 }
