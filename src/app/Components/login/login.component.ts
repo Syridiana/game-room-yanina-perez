@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   password: string | undefined;
   passwordRepeat: string | undefined;
   name: string | undefined;
+  usersArray: UserInterface[] | undefined;
 
   constructor(private fb: FormBuilder, private afAuth: AngularFireAuth, private router: Router, private FirebaseCodeError: FirebaseCodeErrorService,
     private userFirestoreService: UserFirestoreService) {
@@ -52,6 +53,10 @@ export class LoginComponent implements OnInit {
       })
     })
 
+    this.userFirestoreService.getUsers().subscribe(users => {
+      this.usersArray = users;
+
+    })
 
   }
 
@@ -110,11 +115,17 @@ export class LoginComponent implements OnInit {
 
         this.userFirestoreService.addUser({
           'email': this.email,
-          'userName': this.name,
           'points': 0,
-          'registerDate': cValue
+          'registerDate': cValue,
+          'userName': this.name,
         });
 
+        localStorage.setItem('userActive', JSON.stringify({
+          'email': this.email,
+          'points': 0,
+          'registerDate': cValue,
+          'userName': this.name,
+        }));
 
 
       }).catch((error) => {
@@ -148,7 +159,7 @@ export class LoginComponent implements OnInit {
 
     this.afAuth.signInWithEmailAndPassword(this.email!, this.password!).then((user) => {
 
-      console.log(user);
+
 
       Swal.fire({
         title: 'Usuario logueado',
@@ -164,6 +175,18 @@ export class LoginComponent implements OnInit {
       })
 
       this.router.navigate(['/']);
+
+      const userActive = this.usersArray!.find(u => u.email === this.email);
+
+      localStorage.setItem('userActive', JSON.stringify({
+        'id': userActive!.id,
+        'email': userActive!.email,
+        'points': userActive!.points,
+        'registerDate': userActive!.registerDate,
+        'userName': userActive!.userName,
+      }));
+
+
 
 
     }).catch((error) => {
