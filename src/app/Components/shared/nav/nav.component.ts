@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import UserInterface from 'src/app/Entities/user-interface';
 import { UserFirestoreService } from 'src/app/Services/user-firestore-service.service';
 import Swal from 'sweetalert2';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-nav',
@@ -15,11 +16,14 @@ export class NavComponent implements OnInit {
   public currentUser!: any | null;
   public userName: string | any;
   usersArray: UserInterface[] | undefined;
+  public mobile = false;
+  public burger = false;
 
-  constructor(private angularFireAuth: AngularFireAuth, private routes: Router, private userFirestoreService: UserFirestoreService) {
+  constructor(private angularFireAuth: AngularFireAuth, private routes: Router, 
+    private userFirestoreService: UserFirestoreService, private responsive: BreakpointObserver) {
 
     this.angularFireAuth.onAuthStateChanged((user) => {
-      if(user){
+      if (user) {
         this.currentUserEmail = user.email;
       }
       this.userFirestoreService.getUsers().subscribe(users => {
@@ -27,31 +31,30 @@ export class NavComponent implements OnInit {
         this.userName = (this.usersArray?.find(u => u.email === this.currentUserEmail))?.userName;
       })
     })
-/* 
-    this.userFirestoreService.getUsers().subscribe(users => {
-      this.usersArray = users;
-    }) */
-   }
+    /* 
+        this.userFirestoreService.getUsers().subscribe(users => {
+          this.usersArray = users;
+        }) */
+  }
 
   ngOnInit(): void {
+    this.responsive.observe(Breakpoints.Handset)
+    .subscribe(result => {
+      this.mobile = false;
+      this.burger = false;
+      if(result.matches){
+        this.mobile = true;
+        this.burger =  true;
+      }
+    })
   }
 
   openMenu() {
-    let x = Array.from(document.getElementsByClassName('nav-item') as HTMLCollectionOf<HTMLElement>)
-
-    x.forEach( link => {
-       if (link && link.style.display === "block") {
-        link.style.display = "none";
-      } else {
-        link!.style.display = "block";
-      } 
-    } )
-
-
+    this.mobile = !this.mobile;
   }
 
-  closeMenu(){
-    if(window.matchMedia("(max-width: 768px)").matches){
+  closeMenu() {
+    if (window.matchMedia("(max-width: 768px)").matches) {
       this.openMenu();
     }
 
@@ -75,9 +78,14 @@ export class NavComponent implements OnInit {
       iconColor: "#000",
       color: "#000"
     });
-    
+
     this.routes.navigate(['/']);
-    
+
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      this.openMenu();
+    }
+
+
 
   }
 

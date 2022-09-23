@@ -51,3 +51,5 @@ Orange: #FB992A
 Light Pink: #FFC09F
 Black: #0D1311
 White: #FDFDFD */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

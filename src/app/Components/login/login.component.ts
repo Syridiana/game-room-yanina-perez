@@ -1,13 +1,19 @@
+// Angular
 import { Component, OnInit } from '@angular/core';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/compat/auth'
-import { defaultUrlMatcher, DefaultUrlSerializer, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { formatDate } from '@angular/common';
+
+// Alerts
 import Swal from 'sweetalert2';
 import { FirebaseCodeErrorService } from 'src/app/Services/firebase-code-error.service';
-import UserInterface from 'src/app/Entities/user-interface';
-import { formatDate } from '@angular/common';
+
+// BD and Auth
 import { UserFirestoreService } from 'src/app/Services/user-firestore-service.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth'
+
+// Interfaces
+import UserInterface from 'src/app/Entities/user-interface';
 
 
 @Component({
@@ -15,18 +21,28 @@ import { UserFirestoreService } from 'src/app/Services/user-firestore-service.se
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
+
+  // Forms
   userRegister: FormGroup;
   userLogin: FormGroup;
+
+  // Users in Firestore
+  usersArray: UserInterface[] | undefined;
+
+  // User data
   email: string | undefined;
   password: string | undefined;
   passwordRepeat: string | undefined;
   name: string | undefined;
-  usersArray: UserInterface[] | undefined;
 
-  constructor(private fb: FormBuilder, private afAuth: AngularFireAuth, private router: Router, private FirebaseCodeError: FirebaseCodeErrorService,
+
+  constructor(private fb: FormBuilder, private afAuth: AngularFireAuth,
+    private router: Router, private FirebaseCodeError: FirebaseCodeErrorService,
     private userFirestoreService: UserFirestoreService) {
 
+    // Form validators - Register
     this.userRegister = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -34,6 +50,7 @@ export class LoginComponent implements OnInit {
       name: ['', Validators.required]
     });
 
+    // Form validators - Login
     this.userLogin = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -44,6 +61,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // Buttons
     const switchers = document.querySelectorAll('.switcher');
 
     switchers.forEach(item => {
@@ -53,25 +71,20 @@ export class LoginComponent implements OnInit {
       })
     })
 
+    // Users in DB
     this.userFirestoreService.getUsers().subscribe(users => {
       this.usersArray = users;
-
     })
 
   }
 
-  autoComplete(): void {
-    this.userLogin.controls['email'].setValue("test@test.com");
-    this.userLogin.controls['password'].setValue("test123");
-  }
 
 
-  async register() {
+  register() {
     this.email = this.userRegister.value.email;
     this.password = this.userRegister.value.password;
     this.passwordRepeat = this.userRegister.value.passwordRepeat;
     this.name = this.userRegister.value.name;
-
 
     if (this.password !== this.passwordRepeat) {
 
@@ -106,26 +119,21 @@ export class LoginComponent implements OnInit {
 
         this.router.navigate(['/']);
 
-        const currentDate = new Date();
-
-        const cValue = formatDate(currentDate, 'yyyy-MM-dd', 'en-US');
-
-
-
-
+        const currentDate = new Date();// TODO - Make a function to handle this
+        const cValue = formatDate(currentDate, 'medium', 'en-US');// TODO - Make a function to handle this
         this.userFirestoreService.addUser({
           'email': this.email,
           'points': 0,
-          'registerDate': cValue,
+          'loginDate': cValue,
           'userName': this.name,
-        });
+        });// TODO - Make a function to handle this
 
         localStorage.setItem('userActive', JSON.stringify({
           'email': this.email,
           'points': 0,
-          'registerDate': cValue,
+          'loginDate': cValue,
           'userName': this.name,
-        }));
+        }));// TODO - Make a function to handle this
 
 
       }).catch((error) => {
@@ -147,19 +155,14 @@ export class LoginComponent implements OnInit {
       });
     }
 
-
-
   }
+
 
   login(): void {
     this.email = this.userLogin.value.email;
     this.password = this.userLogin.value.password;
 
-
-
     this.afAuth.signInWithEmailAndPassword(this.email!, this.password!).then((user) => {
-
-
 
       Swal.fire({
         title: 'Usuario logueado',
@@ -176,18 +179,20 @@ export class LoginComponent implements OnInit {
 
       this.router.navigate(['/']);
 
-      const userActive = this.usersArray!.find(u => u.email === this.email);
+      const currentDate = new Date();// TODO - Make a function to handle this
+      const cValue = formatDate(currentDate, 'medium', 'en-US');// TODO - Make a function to handle this
+
+      const userActive = this.usersArray!.find(u => u.email === this.email); // TODO - Make a function to handle this
+
+      this.userFirestoreService.updateUser(userActive!, cValue); // TODO - Make a function to handle this
 
       localStorage.setItem('userActive', JSON.stringify({
         'id': userActive!.id,
         'email': userActive!.email,
         'points': userActive!.points,
-        'registerDate': userActive!.registerDate,
+        'loginDate': userActive!.loginDate,
         'userName': userActive!.userName,
-      }));
-
-
-
+      }));// TODO - Make a function to handle this
 
     }).catch((error) => {
 
@@ -206,20 +211,17 @@ export class LoginComponent implements OnInit {
 
     });
 
-
-
-
   }
 
 
-setUser(user: any){
-  localStorage.setItem('testObject', JSON.stringify(user));
-}
+/*   setUser(user: any) {
+    localStorage.setItem('testObject', JSON.stringify(user));
+  } */
 
-deleteUser(user: any){
-
-}
-
+  autoComplete(): void {
+    this.userLogin.controls['email'].setValue("test@test.com");
+    this.userLogin.controls['password'].setValue("test123");
+  }
 
 
 }

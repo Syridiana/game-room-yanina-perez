@@ -23,6 +23,7 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { FirestoreModule } from '@angular/fire/firestore';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -50,7 +51,8 @@ import { FirestoreModule } from '@angular/fire/firestore';
     ReactiveFormsModule,
     FirestoreModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
