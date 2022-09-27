@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/Entities/user';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import UserInterface from 'src/app/Entities/user-interface';
 
 @Component({
   selector: 'app-game',
@@ -13,8 +15,15 @@ export class GameComponent implements OnInit {
   edadDos:number|undefined;
   promedio:number|undefined;
 
-  constructor() { 
-/*     this.usuario.nombre = ''; */
+  public currentUser!: any | null;
+
+
+  constructor(private angularFireAuth: AngularFireAuth) { 
+    this.angularFireAuth.onAuthStateChanged((user) => {
+      if (user) {
+        this.currentUser = user;
+      }
+    })
   }
 
   ngOnInit(): void {

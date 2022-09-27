@@ -11,14 +11,18 @@
 <input type="button" (click)="limpiar()" value="Limpiar"> 
  -->
 
+<div class="container" *ngIf="currentUser">
+    <li>
+        <a class="link" routerLink="hangman">Ahorcado</a>
+    </li>
+    <li>
+        <a class="link" routerLink="greater-or-less">Mayor o menor</a>
+    </li>
+</div>
 
-<li>
-    <a class="link" routerLink="hangman">Ahorcado</a>
-</li>
-<li>
-    <a class="link" routerLink="greater-or-less">Mayor o menor</a>
-</li>
+<div class="container" *ngIf="!currentUser">
+    Debe loguearse para jugar
+</div>
+
 
 <!--   <router-outlet></router-outlet> -->
-
-

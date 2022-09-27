@@ -24,6 +24,7 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { FirestoreModule } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChatComponent } from './Components/chat/chat.component';
 
 
 
@@ -41,7 +42,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TriviaComponent,
     SpinnerComponent,
     NavComponent,
-    ErrorComponent
+    ErrorComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
