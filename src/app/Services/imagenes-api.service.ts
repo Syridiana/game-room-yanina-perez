@@ -13,23 +13,23 @@ export class ImagenesAPIService {
 //f01de0fa0017ce1106e1fab2dd2685b7 apikey
   public obtenerFrames(movieId:any){
     const url = 'https://api.themoviedb.org/3/movie/' + movieId + '/images?api_key=f01de0fa0017ce1106e1fab2dd2685b7';
-    return this.http.get(url, 
+    return this.http.get(url/* , 
     {headers: new HttpHeaders({'X-Api-Key': 'norcYee9ziaM/Wnd38PvAg==aZknDrLkaDdUvsot'})
-  });
+  } */);
 }
 
 public obtenerDatos(movieId:any){
-  const url = 'https://api.themoviedb.org/3/movie/' + movieId + '?api_key=f01de0fa0017ce1106e1fab2dd2685b7';
-  return this.http.get(url, 
+  const url = 'https://api.themoviedb.org/3/movie/' + movieId + '?api_key=f01de0fa0017ce1106e1fab2dd2685b7&language=es-ES';
+  return this.http.get(url/* , 
   {headers: new HttpHeaders({'X-Api-Key': 'norcYee9ziaM/Wnd38PvAg==aZknDrLkaDdUvsot'})
-});
+} */);
 }
 
 public obtenerListaGenero(movieId:number){
   const url = 'https://api.themoviedb.org/3/movie/' + movieId + '/recommendations?api_key=f01de0fa0017ce1106e1fab2dd2685b7';
   
-  return this.http.get(url, 
+  return this.http.get(url/* , 
   {headers: new HttpHeaders({'X-Api-Key': 'norcYee9ziaM/Wnd38PvAg==aZknDrLkaDdUvsot'})
-});
+} */);
 }
 }

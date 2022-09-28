@@ -25,6 +25,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { FirestoreModule } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChatComponent } from './Components/chat/chat.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -54,7 +55,8 @@ import { ChatComponent } from './Components/chat/chat.component';
     FirestoreModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
-    BrowserAnimationsModule
+    BrowserAnimationsModule, 
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
