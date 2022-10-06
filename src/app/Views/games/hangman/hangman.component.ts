@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { UserFirestoreService } from 'src/app/Services/user-firestore-service.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import UserInterface from 'src/app/Entities/user-interface';
+import { ScoresService } from 'src/app/Services/scores.service';
 /* import { DBService } from '../../servicios/db.service';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { UserI } from 'src/app/clases/UserI'; */
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-hangman',
@@ -36,7 +38,8 @@ export class HangmanComponent implements OnInit {
   public currentUserEmail: any;
 /*   public currentUser!: UserI | null; */
 
-  constructor(public userFService: UserFirestoreService, private angularFireAuth: AngularFireAuth) {
+  constructor(public userFService: UserFirestoreService, private angularFireAuth: AngularFireAuth,
+    private scoreService: ScoresService) {
     this.random = Math.floor((Math.random() * (this.palabras.length - 1)));
     this.palabra = this.palabras[this.random];
     this.palabraGuiones = new Array(this.palabra.length);
@@ -80,7 +83,7 @@ export class HangmanComponent implements OnInit {
 
     if (this.letrasErroneas.length === 6) {
       this.message = 'Ups! You\'re dead now. You lost 100 points';
-      this.userFService.updateUserPoints(this.currentUser!, -100);
+      /* this.userFService.updateUserPoints(this.currentUser!, -100); */
 /*       this.dbService.addPuntaje(-100);
       this.dbService.updatePuntaje(-100); */
     }
@@ -101,6 +104,16 @@ export class HangmanComponent implements OnInit {
     if (flag) {
       this.message = 'You\'re free ! You earned 100 points';
       this.won = true;
+
+      const currentDate = new Date();// TODO - Make a function to handle this
+      const cValue = formatDate(currentDate, 'medium', 'en-US');// TODO - Make a function to handle this
+      this.scoreService.addScore({
+        game: 'hangman',
+        userName: this.currentUser?.userName,
+        savedAt: cValue,
+        score: 100,
+        userEmail: this.currentUserEmail,
+      });
 /*       this.dbService.addPuntaje(100);
       this.dbService.updatePuntaje(100); */
     }

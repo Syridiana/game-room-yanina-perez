@@ -1,6 +1,7 @@
 export interface ScoreI {
-    user?: object;
+    userEmail?: string;
+    userName?: string;
     game: string;
-    savedAt: number;
+    savedAt: number | string;
     score?: number | string;
   }

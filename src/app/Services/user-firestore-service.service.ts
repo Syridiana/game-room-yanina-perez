@@ -31,8 +31,7 @@ export class UserFirestoreService {
 
   updateUserPoints(user: UserInterface, points: number){
     const userDocRef = doc(getFirestore(), `users/${user.id}`);
-    console.log(userDocRef)
-    /* return updateDoc(userDocRef, { loginDate: date }); */
+  /*   return updateDoc(userDocRef, { loginDate: date }); */
   }
 
 

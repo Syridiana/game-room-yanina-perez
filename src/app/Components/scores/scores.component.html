@@ -1,0 +1,12 @@
+<div class="table-responsive">
+    <table class="table text-center">
+      <tbody>
+        <tr class="row--" *ngFor="let score of scoreList">
+          <th scope="row" class="text-start">Usuario: {{ score.userName }}</th>
+          <td>Juego: {{ score.game }}</td>
+          <td>Fecha: {{ score.savedAt }}</td>
+          <td>Puntos: {{ score.score }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

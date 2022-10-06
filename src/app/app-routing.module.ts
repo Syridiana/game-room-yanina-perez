@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ChatComponent } from './Components/chat/chat.component';
 import { LoginComponent } from './Components/login/login.component';
+import { ScoresComponent } from './Components/scores/scores.component';
 import { ErrorComponent } from './Components/shared/error/error.component';
 import { AboutComponent } from './Views/about/about.component';
 import { GameComponent } from './Views/games/game.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'error', component: ErrorComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'scores', component: ScoresComponent },
   { path: "**", component: NotFoundComponent }
 
 ];

@@ -26,6 +26,7 @@ import { FirestoreModule } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChatComponent } from './Components/chat/chat.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ScoresComponent } from './Components/scores/scores.component';
 
 
 
@@ -44,7 +45,8 @@ import { HttpClientModule } from '@angular/common/http';
     SpinnerComponent,
     NavComponent,
     ErrorComponent,
-    ChatComponent
+    ChatComponent,
+    ScoresComponent
   ],
   imports: [
     BrowserModule,

@@ -11,11 +11,11 @@ export class GameService {
   private scoreCollection: AngularFirestoreCollection<ScoreI>;
   private nameCollectionDB = 'scores';
 
-  constructor(private afs: AngularFirestore) {
-    this.scoreCollection = afs.collection<ScoreI>(this.nameCollectionDB);
+  constructor(/* private afs: AngularFirestore */) {
+/*     this.scoreCollection = afs.collection<ScoreI>(this.nameCollectionDB); */
   }
 
-  public getAllScores(): Observable<ScoreI[]> {
+/*   public getAllScores(): Observable<ScoreI[]> {
     return this.afs
       .collection(this.nameCollectionDB)
       .snapshotChanges()
@@ -30,8 +30,8 @@ export class GameService {
         )
       );
   }
-
-  public getScoreByGameName(gameName: string) {
+ */
+/*   public getScoreByGameName(gameName: string) {
     return this.afs
       .collection<ScoreI>(
         this.nameCollectionDB,
@@ -40,7 +40,7 @@ export class GameService {
       )
 
       .valueChanges();
-  }
+  } */
 
   public saveScoreGame(data: ScoreI) {
     try {
