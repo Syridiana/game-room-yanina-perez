@@ -86,6 +86,16 @@ export class HangmanComponent implements OnInit {
       /* this.userFService.updateUserPoints(this.currentUser!, -100); */
 /*       this.dbService.addPuntaje(-100);
       this.dbService.updatePuntaje(-100); */
+
+      const currentDate = new Date();// TODO - Make a function to handle this
+      const cValue = formatDate(currentDate, 'medium', 'en-US');// TODO - Make a function to handle this
+      this.scoreService.addScore({
+        game: 'hangman',
+        userName: this.currentUser?.userName,
+        savedAt: cValue,
+        score: -100,
+        userEmail: this.currentUserEmail,
+      });
     }
 
     this.chequearPalabraCompleta();

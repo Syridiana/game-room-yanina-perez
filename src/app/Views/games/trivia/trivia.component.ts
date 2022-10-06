@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ImagenesAPIService } from '../../../Services/imagenes-api.service';
 import Swal from 'sweetalert2';
+import { formatDate } from '@angular/common';
+import { ScoresService } from 'src/app/Services/scores.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { UserFirestoreService } from 'src/app/Services/user-firestore-service.service';
+import UserInterface from 'src/app/Entities/user-interface';
 
 @Component({
   selector: 'app-trivia',
@@ -13,10 +18,15 @@ export class TriviaComponent implements OnInit {
   pickedMovie: any;
   movieListId = [{ 'id': 694, 'name': 'El Resplandor' }];
 
+  usersArray: UserInterface[] | undefined;
+  currentUser?: UserInterface;
+  public currentUserEmail: any;
+
   imageUrl = '';
   movieName = "";
 
-  constructor(private datosApi: ImagenesAPIService) {
+  constructor(private datosApi: ImagenesAPIService, private scoreService: ScoresService,
+    private angularFireAuth: AngularFireAuth, private userFService: UserFirestoreService) {
     this.pickMovie();
 /*     this.loadMovie(782);
     this.loadMovie(680);
@@ -24,15 +34,36 @@ export class TriviaComponent implements OnInit {
     this.loadMovie(550); */
     this.obtenerLista(782);
 /*     this.obtenerLista(493922); */
+
+
+this.angularFireAuth.onAuthStateChanged((user) => {
+  if (user) {
+    this.currentUserEmail = user.email;
+  }})
+
+  this.userFService.getUsers().subscribe(users => {
+    this.usersArray = users;
+    this.currentUser = this.usersArray?.find(u => u.email === this.currentUserEmail);
+  })
   }
 
   chequearPelicula(id: any) {
     if (this.pickedMovie.id == id) {
 
+      const currentDate = new Date();// TODO - Make a function to handle this
+      const cValue = formatDate(currentDate, 'medium', 'en-US');// TODO - Make a function to handle this
+      this.scoreService.addScore({
+        game: 'hangman',
+        userName: this.currentUser?.userName,
+        savedAt: cValue,
+        score: 10,
+        userEmail: this.currentUserEmail,
+      });
+
       Swal.fire({
         icon: 'success',
         title: 'Great !',
-        text: 'Good Job',
+        text: 'Won 10 points',
         showConfirmButton: false,
         timer: 1500
       });
@@ -40,9 +71,19 @@ export class TriviaComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Too bad !',
-        text: 'That\'s wrong',
+        text: 'Lost 10 points',
         showConfirmButton: false,
         timer: 1500
+      });
+
+      const currentDate = new Date();// TODO - Make a function to handle this
+      const cValue = formatDate(currentDate, 'medium', 'en-US');// TODO - Make a function to handle this
+      this.scoreService.addScore({
+        game: 'hangman',
+        userName: this.currentUser?.userName,
+        savedAt: cValue,
+        score: -10,
+        userEmail: this.currentUserEmail,
       });
     }
     this.pickMovie();
