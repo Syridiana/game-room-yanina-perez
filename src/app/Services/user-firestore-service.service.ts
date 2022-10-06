@@ -29,6 +29,11 @@ export class UserFirestoreService {
     return collectionData(userRef, { idField : 'id' }) as Observable<UserInterface[]>;
   }
 
+  updateUserPoints(user: UserInterface, points: number){
+    const userDocRef = doc(getFirestore(), `users/${user.id}`);
+    console.log(userDocRef)
+    /* return updateDoc(userDocRef, { loginDate: date }); */
+  }
 
 
 

@@ -257,22 +257,36 @@
     }
 } */
 
-body,html{
+
+#bg{
+    position: absolute;
+    width: 100%;
     height: 100%;
-    margin: 0;
-    background: #7F7FD5;
-   background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
-    background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    display: flex;
+/*     justify-content: center; */
+    align-items: center;
+    background-color: var(--sky);
+    z-index: -10;
+}
+
+
+.container-fluid{
+    background-color: var(--sky);
 }
 
 .chat{
     margin-top: auto;
     margin-bottom: auto;
+    margin-left: 7%;
+    margin-right: 7%;
 }
 .card{
-    height: 500px;
+    height: 78vh;
     border-radius: 15px !important;
-    background-color: rgba(0,0,0,0.4) !important;
+    background-color: var(--white) !important;
 }
 .contacts_body{
     padding:  0.75rem 0 !important;
@@ -390,7 +404,7 @@ margin-left: 15px;
 }
 .user_info span{
 font-size: 20px;
-color: white;
+color: var(--dark);
 }
 .user_info p{
 font-size: 10px;
@@ -411,7 +425,7 @@ margin-top: auto;
 margin-bottom: auto;
 margin-left: 10px;
 border-radius: 25px;
-background-color: #82ccdd;
+background-color: var(--sky);
 padding: 10px;
 position: relative;
 min-width: 300px;
@@ -421,7 +435,7 @@ margin-top: auto;
 margin-bottom: auto;
 margin-right: 10px;
 border-radius: 25px;
-background-color: #78e08f;
+background-color: var(--accent);
 padding: 10px;
 position: relative;
 min-width: 300px;
@@ -430,14 +444,14 @@ min-width: 300px;
 position: absolute;
 left: 0;
 bottom: -20px;
-color: rgba(255,255,255,0.5);
+color: var(--dark);
 font-size: 11px;
 }
 .msg_time_send{
 position: absolute;
 right:0;
 bottom: -20px;
-color: rgba(255,255,255,0.5);
+color: var(--dark);
 font-size: 11px;
 }
 .msg_head{

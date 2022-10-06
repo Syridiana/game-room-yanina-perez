@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserFirestoreService } from 'src/app/Services/user-firestore-service.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import UserInterface from 'src/app/Entities/user-interface';
 /* import { DBService } from '../../servicios/db.service';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { UserI } from 'src/app/clases/UserI'; */
@@ -27,9 +30,13 @@ export class HangmanComponent implements OnInit {
   vidas = [1, 1, 1, 1, 1, 1];
   message = 'Be brave';
   won = false;
+  usersArray: UserInterface[] | undefined;
+  currentUser?: UserInterface;
+
+  public currentUserEmail: any;
 /*   public currentUser!: UserI | null; */
 
-  constructor(/* public dbService: DBService, private angularFireAuth: AngularFireAuth */) {
+  constructor(public userFService: UserFirestoreService, private angularFireAuth: AngularFireAuth) {
     this.random = Math.floor((Math.random() * (this.palabras.length - 1)));
     this.palabra = this.palabras[this.random];
     this.palabraGuiones = new Array(this.palabra.length);
@@ -38,9 +45,15 @@ export class HangmanComponent implements OnInit {
     this.letraCorrecta = false;
     this.letrasErroneas = [];
     
-/*     this.angularFireAuth.onAuthStateChanged((user) => {
-      this.currentUser = user;
-    }); */
+    this.angularFireAuth.onAuthStateChanged((user) => {
+      if (user) {
+        this.currentUserEmail = user.email;
+      }})
+
+      this.userFService.getUsers().subscribe(users => {
+        this.usersArray = users;
+        this.currentUser = this.usersArray?.find(u => u.email === this.currentUserEmail);
+      })
 
   }
 
@@ -67,6 +80,7 @@ export class HangmanComponent implements OnInit {
 
     if (this.letrasErroneas.length === 6) {
       this.message = 'Ups! You\'re dead now. You lost 100 points';
+      this.userFService.updateUserPoints(this.currentUser!, -100);
 /*       this.dbService.addPuntaje(-100);
       this.dbService.updatePuntaje(-100); */
     }

@@ -18,12 +18,12 @@ export class TriviaComponent implements OnInit {
 
   constructor(private datosApi: ImagenesAPIService) {
     this.pickMovie();
-    this.loadMovie(782);
+/*     this.loadMovie(782);
     this.loadMovie(680);
     this.loadMovie(493922);
-    this.loadMovie(550);
+    this.loadMovie(550); */
     this.obtenerLista(782);
-    this.obtenerLista(493922);
+/*     this.obtenerLista(493922); */
   }
 
   chequearPelicula(id: any) {
