@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Timestamp } from 'firebase/firestore';
+import UserInterface from 'src/app/Entities/user-interface';
+import { ScoresService } from 'src/app/Services/scores.service';
+import { UserFirestoreService } from 'src/app/Services/user-firestore-service.service';
 import Swal from 'sweetalert2';
 /* import { AngularFireAuth } from "@angular/fire/auth";
 import { UserI } from 'src/app/clases/UserI'; */
@@ -22,17 +27,31 @@ export class MyGameComponent implements OnInit {
   Esta posición comienza siendo la [2, 2]*/
   filaVacia = 2;
   columnaVacia = 2;
+  points = 0;
 
   movimientos = [''];
   direccion = "";
   ultimoMov = "";
-/*   public currentUser!: UserI | null; */
 
-  constructor(/* private angularFireAuth: AngularFireAuth */) {
+  usersArray: UserInterface[] | undefined;
+  currentUser?: UserInterface;
+
+  public currentUserEmail: any;
+
+
+  constructor(private angularFireAuth: AngularFireAuth, private scoreService: ScoresService,
+    private userFService: UserFirestoreService) {
     this.mezclarPiezas(30);
-/*     this.angularFireAuth.onAuthStateChanged((user) => {
-      this.currentUser = user;
-    }); */
+
+    this.angularFireAuth.onAuthStateChanged((user) => {
+      if (user) {
+        this.currentUserEmail = user.email;
+      }})
+
+      this.userFService.getUsers().subscribe(users => {
+        this.usersArray = users;
+        this.currentUser = this.usersArray?.find(u => u.email === this.currentUserEmail);
+      })
   }
 
   /* Esta función va a chequear si el Rompecabezas esta en la posicion ganadora. 
@@ -45,6 +64,23 @@ export class MyGameComponent implements OnInit {
       }
     }
     if (arr == '123456789') {
+      if(this.movimientos.length < 12) {
+        this.points  = 300;
+      } else if (this.movimientos.length < 24){
+        this.points  = 100;
+      } else {
+        this.points = 10;
+      }
+
+      const currentDate = Timestamp.now();
+      this.scoreService.addScore({
+        game: 'Puzzle',
+        userName: this.currentUser?.userName,
+        savedAt: currentDate,
+        score: this.points,
+        userEmail: this.currentUserEmail,
+      });
+
       return true;
     } else {
       return false;
@@ -57,11 +93,13 @@ export class MyGameComponent implements OnInit {
     if (this.chequearSiGano()) {
       Swal.fire({
         icon: 'success',
-        title: 'Ganaste !',
+        title: 'Ganaste ' + this.points + ' puntos.',
         text: 'Te llevó ' + this.movimientos.length + ' movimientos.',
         showConfirmButton: false,
         timer: 2500
       });
+
+      this.points = 0;
     }
 
   }
