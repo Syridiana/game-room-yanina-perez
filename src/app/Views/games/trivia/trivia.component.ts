@@ -53,7 +53,7 @@ this.angularFireAuth.onAuthStateChanged((user) => {
 
       const currentDate = Timestamp.now();
       this.scoreService.addScore({
-        game: 'hangman',
+        game: 'Preguntados',
         userName: this.currentUser?.userName,
         savedAt: currentDate,
         score: 10,
@@ -78,7 +78,7 @@ this.angularFireAuth.onAuthStateChanged((user) => {
 
       const currentDate = Timestamp.now();
       this.scoreService.addScore({
-        game: 'hangman',
+        game: 'Preguntados',
         userName: this.currentUser?.userName,
         savedAt: currentDate,
         score: -10,

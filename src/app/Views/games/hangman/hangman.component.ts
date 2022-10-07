@@ -90,7 +90,7 @@ export class HangmanComponent implements OnInit {
 
       const currentDate = Timestamp.now();
       this.scoreService.addScore({
-        game: 'hangman',
+        game: 'Ahorcado',
         userName: this.currentUser?.userName,
         savedAt: currentDate,
         score: -100,
@@ -118,7 +118,7 @@ export class HangmanComponent implements OnInit {
       
       const currentDate = Timestamp.now();
       this.scoreService.addScore({
-        game: 'hangman',
+        game: 'Ahorcado',
         userName: this.currentUser?.userName,
         savedAt: currentDate,
         score: 100,
