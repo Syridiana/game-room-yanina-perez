@@ -4,7 +4,7 @@
         <tr class="row--" *ngFor="let score of scoreList">
           <th scope="row" class="text-start">Usuario: {{ score.userName }}</th>
           <td>Juego: {{ score.game }}</td>
-          <td>Fecha: {{ score.savedAt }}</td>
+          <td>Fecha: {{ score.savedAt?.toDate() | date: 'medium' }}</td>
           <td>Puntos: {{ score.score }}</td>
         </tr>
       </tbody>

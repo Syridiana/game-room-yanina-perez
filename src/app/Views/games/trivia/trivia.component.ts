@@ -6,6 +6,7 @@ import { ScoresService } from 'src/app/Services/scores.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { UserFirestoreService } from 'src/app/Services/user-firestore-service.service';
 import UserInterface from 'src/app/Entities/user-interface';
+import { Timestamp } from 'firebase/firestore';
 
 @Component({
   selector: 'app-trivia',
@@ -50,12 +51,11 @@ this.angularFireAuth.onAuthStateChanged((user) => {
   chequearPelicula(id: any) {
     if (this.pickedMovie.id == id) {
 
-      const currentDate = new Date();// TODO - Make a function to handle this
-      const cValue = formatDate(currentDate, 'medium', 'en-US');// TODO - Make a function to handle this
+      const currentDate = Timestamp.now();
       this.scoreService.addScore({
         game: 'hangman',
         userName: this.currentUser?.userName,
-        savedAt: cValue,
+        savedAt: currentDate,
         score: 10,
         userEmail: this.currentUserEmail,
       });
@@ -76,12 +76,11 @@ this.angularFireAuth.onAuthStateChanged((user) => {
         timer: 1500
       });
 
-      const currentDate = new Date();// TODO - Make a function to handle this
-      const cValue = formatDate(currentDate, 'medium', 'en-US');// TODO - Make a function to handle this
+      const currentDate = Timestamp.now();
       this.scoreService.addScore({
         game: 'hangman',
         userName: this.currentUser?.userName,
-        savedAt: cValue,
+        savedAt: currentDate,
         score: -10,
         userEmail: this.currentUserEmail,
       });

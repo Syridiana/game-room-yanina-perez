@@ -7,6 +7,7 @@ import { ScoresService } from 'src/app/Services/scores.service';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { UserI } from 'src/app/clases/UserI'; */
 import { formatDate } from '@angular/common';
+import { Timestamp } from 'firebase/firestore';
 
 @Component({
   selector: 'app-hangman',
@@ -87,12 +88,11 @@ export class HangmanComponent implements OnInit {
 /*       this.dbService.addPuntaje(-100);
       this.dbService.updatePuntaje(-100); */
 
-      const currentDate = new Date();// TODO - Make a function to handle this
-      const cValue = formatDate(currentDate, 'medium', 'en-US');// TODO - Make a function to handle this
+      const currentDate = Timestamp.now();
       this.scoreService.addScore({
         game: 'hangman',
         userName: this.currentUser?.userName,
-        savedAt: cValue,
+        savedAt: currentDate,
         score: -100,
         userEmail: this.currentUserEmail,
       });
@@ -115,12 +115,12 @@ export class HangmanComponent implements OnInit {
       this.message = 'You\'re free ! You earned 100 points';
       this.won = true;
 
-      const currentDate = new Date();// TODO - Make a function to handle this
-      const cValue = formatDate(currentDate, 'medium', 'en-US');// TODO - Make a function to handle this
+      
+      const currentDate = Timestamp.now();
       this.scoreService.addScore({
         game: 'hangman',
         userName: this.currentUser?.userName,
-        savedAt: cValue,
+        savedAt: currentDate,
         score: 100,
         userEmail: this.currentUserEmail,
       });

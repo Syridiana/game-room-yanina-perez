@@ -21,7 +21,7 @@ export class ChatServiceService {
 
   getMessages(){
     const chatRef = collection(getFirestore(), 'chat');
-    const filteredChats = query(chatRef, orderBy("time", 'desc'), limit(20));
+    const filteredChats = query(chatRef, orderBy("savedAt", 'desc'));
     return collectionData(filteredChats) as Observable<ChatMessageI[]>;
   }
 
